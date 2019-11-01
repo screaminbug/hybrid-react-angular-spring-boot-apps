@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Button from "@material-ui/core/Button";
+import {Bookmarks} from "@material-ui/icons";
+import Navbar from "./Navbar";
+import TextField from "@material-ui/core/TextField";
+import MediaCard from "./Card";
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Navbar />
+                <Button variant="outlined" color="primary">
+                    <Bookmarks></Bookmarks>
+                </Button> <br />
+                <TextField
+                    placeholder="Placeholder here"
+                    label="Basic TextField" />
+                <MediaCard />
+            </div>
+        );
+    }
 }
 
 export default App;
