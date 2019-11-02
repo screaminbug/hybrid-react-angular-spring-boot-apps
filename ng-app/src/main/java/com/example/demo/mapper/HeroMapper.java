@@ -3,7 +3,6 @@ package com.example.demo.mapper;
 import com.example.demo.domain.Hero;
 import com.example.demo.model.HeroDto;
 import org.mapstruct.Mapper;
-import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 

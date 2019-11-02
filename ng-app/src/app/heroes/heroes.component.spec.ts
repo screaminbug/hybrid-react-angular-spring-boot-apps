@@ -8,6 +8,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../app-routing.module';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {HeroDetailComponent} from '../hero-detail/hero-detail.component';
+import {HttpClientModule} from '@angular/common/http';
+import {HeroSearchComponent} from '../hero-search/hero-search.component';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
@@ -20,12 +22,14 @@ describe('HeroesComponent', () => {
         HeroesComponent,
         MessagesComponent,
         DashboardComponent,
-        HeroDetailComponent
+        HeroDetailComponent,
+        HeroSearchComponent
       ],
       imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule
       ],
     })
     .compileComponents();

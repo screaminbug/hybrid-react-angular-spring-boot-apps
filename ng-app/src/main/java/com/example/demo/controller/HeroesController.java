@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/heroes")
+@RequestMapping("/api/heroes")
 public class HeroesController {
 
   private final HeroesRepository heroesRepository;
@@ -23,14 +23,18 @@ public class HeroesController {
     this.heroMapper = heroMapper;
   }
 
-  @GetMapping
-  public List<HeroDto> getHeroes() {
-    return heroMapper.domainToModel(heroesRepository.findAll());
-  }
-
   @GetMapping("/{id}")
   public HeroDto getHero(@PathVariable Long id) {
     return heroMapper.domainToModel(findHeroOrThrow(id));
+  }
+
+  @GetMapping()
+  public List<HeroDto> getHero(@RequestParam(required = false) String name) {
+    if (name == null || name.equals("")) {
+      return heroMapper.domainToModel(heroesRepository.findAll());
+    } else {
+      return heroMapper.domainToModel(heroesRepository.findByName(name));
+    }
   }
 
   @PostMapping
@@ -41,10 +45,11 @@ public class HeroesController {
     return heroMapper.domainToModel(hero);
   }
 
-  @PutMapping("/{id}")
+  @PutMapping
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public void updateHero(@PathVariable Long id) {
-    Hero hero = findHeroOrThrow(id);
+  public void updateHero(@RequestBody HeroDto heroDto) {
+    Hero hero = findHeroOrThrow(heroDto.getId());
+    hero.setName(heroDto.getName());
     heroesRepository.save(hero);
   }
 
